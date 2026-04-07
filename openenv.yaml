@@ -1,0 +1,46 @@
+id: civic-issue-env
+name: Civic Issue Resolution Environment
+version: 1.0.0
+
+description: >
+  An OpenEnv environment where an AI agent manages civic issues like potholes,
+  garbage, water leaks, and streetlight failures. The agent must assign the
+  correct department, prioritize urgency, and allocate resources efficiently.
+
+entry_point: env.environment:CivicEnv
+
+tasks:
+  - id: easy_1
+    description: Handle a single civic issue
+
+  - id: medium_1
+    description: Solve issue with limited resources
+
+  - id: hard_1
+    description: Handle critical issue with minimal resources
+
+action_space:
+  type: dict
+  properties:
+    department:
+      type: string
+      enum: [road, sanitation, water, electric]
+    priority:
+      type: string
+      enum: [low, medium, high]
+    resources:
+      type: integer
+
+observation_space:
+  type: dict
+  properties:
+    issue_type:
+      type: string
+    severity:
+      type: integer
+    days_pending:
+      type: integer
+    resources_available:
+      type: integer
+
+reward_range: [0.0, 1.0]
